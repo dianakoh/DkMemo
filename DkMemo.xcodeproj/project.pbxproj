@@ -9,13 +9,12 @@
 /* Begin PBXBuildFile section */
 		BB0406A323FA98B800A498CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0406A223FA98B800A498CE /* AppDelegate.swift */; };
 		BB0406A523FA98B800A498CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0406A423FA98B800A498CE /* SceneDelegate.swift */; };
-		BB0406A723FA98B800A498CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0406A623FA98B800A498CE /* ViewController.swift */; };
-		BB0406AA23FA98B800A498CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0406A823FA98B800A498CE /* Main.storyboard */; };
 		BB0406AD23FA98B800A498CE /* DkMemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB0406AB23FA98B800A498CE /* DkMemo.xcdatamodeld */; };
 		BB0406B223FA98B900A498CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB0406B023FA98B900A498CE /* LaunchScreen.storyboard */; };
 		BB0406BD23FA98B900A498CE /* DkMemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0406BC23FA98B900A498CE /* DkMemoTests.swift */; };
 		BB0406C823FA98B900A498CE /* DkMemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0406C723FA98B900A498CE /* DkMemoUITests.swift */; };
 		BB0406D823FAEFA100A498CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0406D723FAEFA000A498CE /* Assets.xcassets */; };
+		BB07831523FAF53000897D3A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB07831423FAF53000897D3A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +38,6 @@
 		BB04069F23FA98B800A498CE /* DkMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DkMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB0406A223FA98B800A498CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BB0406A423FA98B800A498CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BB0406A623FA98B800A498CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BB0406A923FA98B800A498CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB0406AC23FA98B800A498CE /* DkMemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DkMemo.xcdatamodel; sourceTree = "<group>"; };
 		BB0406B123FA98B900A498CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BB0406B323FA98B900A498CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -51,6 +48,7 @@
 		BB0406C723FA98B900A498CE /* DkMemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DkMemoUITests.swift; sourceTree = "<group>"; };
 		BB0406C923FA98B900A498CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BB0406D723FAEFA000A498CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BB07831423FAF53000897D3A /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +102,10 @@
 				BB0406D723FAEFA000A498CE /* Assets.xcassets */,
 				BB0406A223FA98B800A498CE /* AppDelegate.swift */,
 				BB0406A423FA98B800A498CE /* SceneDelegate.swift */,
-				BB0406A623FA98B800A498CE /* ViewController.swift */,
-				BB0406A823FA98B800A498CE /* Main.storyboard */,
 				BB0406B023FA98B900A498CE /* LaunchScreen.storyboard */,
 				BB0406B323FA98B900A498CE /* Info.plist */,
 				BB0406AB23FA98B800A498CE /* DkMemo.xcdatamodeld */,
+				BB07831423FAF53000897D3A /* Main.storyboard */,
 			);
 			path = DkMemo;
 			sourceTree = "<group>";
@@ -235,9 +232,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB07831523FAF53000897D3A /* Main.storyboard in Resources */,
 				BB0406B223FA98B900A498CE /* LaunchScreen.storyboard in Resources */,
 				BB0406D823FAEFA100A498CE /* Assets.xcassets in Resources */,
-				BB0406AA23FA98B800A498CE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +260,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0406AD23FA98B800A498CE /* DkMemo.xcdatamodeld in Sources */,
-				BB0406A723FA98B800A498CE /* ViewController.swift in Sources */,
 				BB0406A323FA98B800A498CE /* AppDelegate.swift in Sources */,
 				BB0406A523FA98B800A498CE /* SceneDelegate.swift in Sources */,
 			);
@@ -301,14 +297,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		BB0406A823FA98B800A498CE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BB0406A923FA98B800A498CE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BB0406B023FA98B900A498CE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
