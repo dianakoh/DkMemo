@@ -19,6 +19,7 @@
 		BB07831A23FAF95900897D3A /* MemoListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07831923FAF95900897D3A /* MemoListTableViewController.swift */; };
 		BB07831C23FBA0C100897D3A /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07831B23FBA0C100897D3A /* ComposeViewController.swift */; };
 		BB07831E23FBA3AB00897D3A /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07831D23FBA3AB00897D3A /* UIViewController+Alert.swift */; };
+		BB07832023FBB1E900897D3A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB07831F23FBB1E900897D3A /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		BB07831923FAF95900897D3A /* MemoListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoListTableViewController.swift; sourceTree = "<group>"; };
 		BB07831B23FBA0C100897D3A /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		BB07831D23FBA3AB00897D3A /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		BB07831F23FBB1E900897D3A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				BB07831923FAF95900897D3A /* MemoListTableViewController.swift */,
 				BB07831B23FBA0C100897D3A /* ComposeViewController.swift */,
 				BB07831D23FBA3AB00897D3A /* UIViewController+Alert.swift */,
+				BB07831F23FBB1E900897D3A /* DetailViewController.swift */,
 			);
 			path = DkMemo;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				BB0406A523FA98B800A498CE /* SceneDelegate.swift in Sources */,
 				BB07831823FAF72700897D3A /* Model.swift in Sources */,
 				BB07831E23FBA3AB00897D3A /* UIViewController+Alert.swift in Sources */,
+				BB07832023FBB1E900897D3A /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
