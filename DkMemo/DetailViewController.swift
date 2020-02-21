@@ -89,7 +89,8 @@ extension DetailViewController: UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath)
             
-            cell.textLabel?.text = memo?.content
+            //cell.textLabel?.text = memo?.content
+            cell.textLabel?.attributedText = memo?.nsData?.toAttributedString()
             return cell
         
         case 1:

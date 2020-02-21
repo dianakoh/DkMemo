@@ -204,14 +204,21 @@
                                 <action selector="close:" destination="mB3-B6-Vib" id="uxh-2S-0Qx"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="03O-XW-TaS">
-                            <connections>
-                                <action selector="save:" destination="mB3-B6-Vib" id="zdR-JY-VTq"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="save" id="03O-XW-TaS">
+                                <connections>
+                                    <action selector="save:" destination="mB3-B6-Vib" id="zdR-JY-VTq"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="camera" id="tX3-YP-fTK">
+                                <connections>
+                                    <action selector="cameraAction:" destination="mB3-B6-Vib" id="iPb-AH-hPe"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="memoTextView" destination="cLQ-Kc-P5w" id="uyi-RO-Bdj"/>
+                        <outlet property="memoTextView" destination="cLQ-Kc-P5w" id="vQH-FU-8vQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bxM-FA-BOW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -254,6 +261,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qU6-Et-n1M"/>
+        <segue reference="WhD-O4-NHz"/>
     </inferredMetricsTieBreakers>
 </document>
