@@ -11,13 +11,13 @@ import UIKit
 class ComposeViewController: UIViewController {
     
     var editTarget: Memo?
+    var originalMemoTitle: String?
     var originalMemoContent: String?
     var originalMemoNSData: NSData?
     
     let picker = UIImagePickerController()
 
-    
-    @IBAction func cameraAction(_ sender: Any) {
+    @IBAction func addImage(_ sender: Any) {
         let alert = UIAlertController(title: "이미지 가져오기", message: "이미지 가져오기", preferredStyle: .actionSheet)
         
         let library = UIAlertAction(title: "사진앨범", style: .default) { (action) in
@@ -53,27 +53,28 @@ class ComposeViewController: UIViewController {
     }
     
     @IBOutlet weak var memoTextView: UITextView!
+    @IBOutlet weak var titleTextView: UITextView!
+    @IBOutlet weak var imageTextView: UITextView!
     
     @IBAction func save(_ sender: Any) {
         guard let memo = memoTextView.text,
             memo.count > 0 else {
-                alert(message: "Please enter any text")
+                alert(message: "텍스트를 입력해주세요")
             return
         }
         
-//        let newMemo = Memo(content: memo)
-//        Memo.dummyMemoList.append(newMemo)
-        
         if let target = editTarget {
+            target.title = titleTextView.text
             target.content = memo
-            target.nsData = memoTextView.attributedText.toNSData()!
+            target.nsData = imageTextView.attributedText.toNSData()!
             DataManager.shared.saveContext()
             NotificationCenter.default.post(name:ComposeViewController.memoDidChange, object:nil)
         } else {
-            print("save")
-            let memoNSData = memoTextView.attributedText.toNSData()!
+            print("메모 저장")
+            let memoTitle = titleTextView.text!
+            let memoNSData = imageTextView.attributedText.toNSData()!
             //DataManager.shared.addNewMemo(memo)
-            DataManager.shared.addNewMemo(memo, memoNSData)
+            DataManager.shared.addNewMemo(memoTitle, memo, memoNSData)
             NotificationCenter.default.post(name: ComposeViewController.newMemoDidInsert, object: nil)
         }
         
@@ -98,18 +99,25 @@ class ComposeViewController: UIViewController {
         super.viewDidLoad()
 
         if let memo = editTarget {
-            navigationItem.title = "Edit Memo"
+            navigationItem.title = "메모 편집"
             
-            //memoTextView.text = memo.content
-            memoTextView.text = ""
-            memoTextView.textStorage.insert((memo.nsData?.toAttributedString())!, at: 0)
+            titleTextView.text = memo.title
+            memoTextView.text = memo.content
+        imageTextView.textStorage.insert((memo.nsData?.toAttributedString())!, at: 0)
+            
+            originalMemoTitle = memo.title
             originalMemoContent = memo.content
             originalMemoNSData = memo.nsData
         } else {
-            navigationItem.title = "New Memo"
-            memoTextView.text = ""
+            navigationItem.title = "새 메모"
+            //memoTextView.text = ""
+//            titleTextView.text = "Title"
+//            titleTextView.textColor = UIColor.lightGray
+//            memoTextView.text = "Content"
+//            memoTextView.textColor = UIColor.lightGray
         }
         
+        titleTextView.delegate = self
         memoTextView.delegate = self
         
         willShowToken = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: OperationQueue.main, using: {[weak self] (noti) in
@@ -145,14 +153,14 @@ class ComposeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        memoTextView.becomeFirstResponder()
+        //titleTextView.becomeFirstResponder()
         navigationController?.presentationController?.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        memoTextView.resignFirstResponder()
+        //titleTextView.resignFirstResponder()
         navigationController?.presentationController?.delegate = nil
     }
 
@@ -176,6 +184,35 @@ extension ComposeViewController: UITextViewDelegate{
             } else {
                 // Fallback on earlier versions
             }
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if titleTextView.text == "제목을 입력해주세요" && memoTextView.text != "" {
+            titleTextView.text = ""
+            titleTextView.textColor = UIColor.black
+        } else if titleTextView.text == "" {
+            titleTextView.text = "제목을 입력해주세요"
+            titleTextView.textColor = UIColor.lightGray
+        }
+        
+        if memoTextView.text == "내용을 입력해주세요" && titleTextView.text != "" {
+            memoTextView.text = ""
+            memoTextView.textColor = UIColor.black
+        } else if memoTextView.text == "" {
+            memoTextView.text = "내용을 입력해주세요"
+            memoTextView.textColor = UIColor.lightGray
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if titleTextView.text == "" {
+            titleTextView.text = "제목을 입력해주세요"
+            titleTextView.textColor = UIColor.lightGray
+        }
+        if memoTextView.text == "" {
+            memoTextView.text = "내용을 입력해주세요"
+            memoTextView.textColor = UIColor.lightGray
         }
     }
 }
@@ -203,22 +240,24 @@ extension ComposeViewController {
 extension ComposeViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            let scaledImage = image.resized(toWidth: self.memoTextView.frame.size.width)
+            let scaledImage = image.resized(toWidth: self.imageTextView.frame.size.width)
             let attachment = NSTextAttachment()
             attachment.image = scaledImage
-            let newImageWidth = (memoTextView.bounds.size.width - 20)
+            let newImageWidth = (imageTextView.bounds.size.width - 20)
             let scale = newImageWidth/image.size.width
             let newImageHeight = image.size.height * scale
             
             attachment.bounds = CGRect.init(x: 0, y: 0, width: newImageWidth, height: newImageHeight)
             
             let attString = NSAttributedString(attachment: attachment)
-            memoTextView.textStorage.insert(attString, at: memoTextView.selectedRange.location)
+            imageTextView.textStorage.insert(attString, at: imageTextView.selectedRange.location)
             //picker.dismiss(animated: true, completion: nil)
             
         }
         dismiss(animated: true, completion: nil)
+        titleTextView.delegate = self
         memoTextView.delegate = self
+        imageTextView.selectedTextRange = imageTextView.textRange(from: imageTextView.endOfDocument, to: imageTextView.endOfDocument)
     }
 }
 

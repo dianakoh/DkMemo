@@ -81,19 +81,27 @@ class DetailViewController: UIViewController {
 
 extension DetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.row {
         case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "titleCell", for: indexPath)
+            
+            cell.textLabel?.text = memo?.title
+            return cell
+        case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "memoCell", for: indexPath)
             
-            //cell.textLabel?.text = memo?.content
+            cell.textLabel?.text = memo?.content
+            return cell
+        case 2:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath)
+            
             cell.textLabel?.attributedText = memo?.nsData?.toAttributedString()
             return cell
-        
-        case 1:
+        case 3:
             let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath)
             cell.textLabel?.text = formatter.string(for: memo?.insertDate)
             
