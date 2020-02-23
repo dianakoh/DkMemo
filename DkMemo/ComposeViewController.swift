@@ -20,7 +20,7 @@ class ComposeViewController: UIViewController {
     let picker = UIImagePickerController()
 
     @IBAction func addImage(_ sender: Any) {
-        let alert = UIAlertController(title: "이미지 가져오기", message: "이미지 가져오기", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "이미지 가져오기", message: "", preferredStyle: .actionSheet)
         
         let library = UIAlertAction(title: "사진앨범", style: .default) { (action) in
             self.picker.delegate = self
@@ -32,12 +32,65 @@ class ComposeViewController: UIViewController {
             self.openCamera()
         }
         
+        let externalLink = UIAlertAction(title: "url", style: .default) { (action) in
+            let alert2 = UIAlertController(title: "url 입력", message: "", preferredStyle: .alert)
+            
+            alert2.addTextField { (urlTextField) in
+                urlTextField.placeholder = "url 을 입력해주세요"
+            }
+            let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
+                self.addImageFromURL((alert2.textFields?[0].text)!)
+                
+            }
+            let cancel2 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            
+            alert2.addAction(cancel2)
+            alert2.addAction(ok)
+            self.present(alert2, animated: true, completion: nil)
+        }
+        
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         
         alert.addAction(library)
         alert.addAction(camera)
+        alert.addAction(externalLink)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
+    }
+    
+    func addImageFromURL(_ urlString: String) {
+        let url = URL(string: urlString)
+        do {
+            if let url = url {
+                let data = try Data(contentsOf: url)
+                let image = UIImage(data: data)
+                let scaledImage = image?.resized(toWidth: self.imageTextView.frame.size.width)
+                let attachment = NSTextAttachment()
+                attachment.image = scaledImage
+                let newImageWidth = (imageTextView.bounds.size.width - 20)
+                let scale = newImageWidth/(image?.size.width)!
+                let newImageHeight = (image?.size.height)! * scale
+                
+                attachment.bounds = CGRect.init(x: 0, y: 0, width: newImageWidth, height: newImageHeight)
+                
+                let attString = NSAttributedString(attachment: attachment)
+                //imageTextView.textStorage.insert(attString, at: imageTextView.selectedRange.location)
+                //picker.dismiss(animated: true, completion: nil)
+                imageTextView.textStorage.append(attString)
+            }
+        } catch let error {
+            debugPrint("Error ::\(error)")
+            let alert = UIAlertController(title: "alert", message: "이미지를 가져올 수 없습니다.", preferredStyle: .alert)
+            
+            let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+            let cancel2 = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+            
+            alert.addAction(cancel2)
+            alert.addAction(ok)
+            self.present(alert, animated: true, completion: nil)
+        }
+
+        
     }
     
     func openLibrary() {
