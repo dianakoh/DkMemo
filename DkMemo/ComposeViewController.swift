@@ -69,7 +69,26 @@ class ComposeViewController: UIViewController {
         if let target = editTarget {
             target.title = titleTextView.text
             target.content = memo
-            target.nsData = imageTextView.attributedText.toNSData()!
+            let memoNSData = imageTextView.attributedText.toNSData()!
+            target.nsData = memoNSData
+            
+            let memoAtt = memoNSData.toAttributedString()
+            
+            memoAtt?.enumerateAttribute(.attachment, in: NSRange(location: 0, length: memoAtt!.length)) { value, range, stop in
+                if let att = value as? NSTextAttachment {
+                    let attstr = NSAttributedString(attachment: att)
+                    let attstrtodata = attstr.toNSData()
+                    
+                    if thumbNailCheck == false {
+                        thumbNailNSData = attstrtodata
+                        thumbNailCheck = true
+                    }
+                    
+                    
+                }
+            }
+            target.thumbnail = thumbNailNSData
+            
             DataManager.shared.saveContext()
             NotificationCenter.default.post(name:ComposeViewController.memoDidChange, object:nil)
         } else {
@@ -121,8 +140,10 @@ class ComposeViewController: UIViewController {
             navigationItem.title = "메모 편집"
             
             titleTextView.text = memo.title
+            titleTextView.textColor = UIColor.black
             memoTextView.text = memo.content
-        imageTextView.textStorage.insert((memo.nsData?.toAttributedString())!, at: 0)
+            memoTextView.textColor = UIColor.black
+            imageTextView.textStorage.insert((memo.nsData?.toAttributedString())!, at: 0)
             
             originalMemoTitle = memo.title
             originalMemoContent = memo.content
