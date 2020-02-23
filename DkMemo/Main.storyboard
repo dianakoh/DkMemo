@@ -223,7 +223,7 @@
                                 </variation>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="내용을 입력해주세요" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cLQ-Kc-P5w">
-                                <rect key="frame" x="0.0" y="110" width="375" height="232"/>
+                                <rect key="frame" x="0.0" y="118" width="375" height="172"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -233,7 +233,7 @@
                                 </variation>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGq-Ru-zDO">
-                                <rect key="frame" x="0.0" y="350" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="300" width="375" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add Image"/>
                                 <connections>
@@ -241,7 +241,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IEW-oo-0ub" userLabel="Image Text View">
-                                <rect key="frame" x="0.0" y="388" width="375" height="350"/>
+                                <rect key="frame" x="0.0" y="338" width="375" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -253,18 +253,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="IEW-oo-0ub" firstAttribute="top" secondItem="7H2-8l-OTB" secondAttribute="bottom" constant="286" id="1xG-5W-Y5E"/>
-                            <constraint firstItem="cLQ-Kc-P5w" firstAttribute="top" secondItem="7H2-8l-OTB" secondAttribute="bottom" constant="8" symbolic="YES" id="4SY-S6-Bsj"/>
+                            <constraint firstItem="IEW-oo-0ub" firstAttribute="top" secondItem="7H2-8l-OTB" secondAttribute="bottom" constant="236" id="1xG-5W-Y5E"/>
+                            <constraint firstItem="cLQ-Kc-P5w" firstAttribute="top" secondItem="7H2-8l-OTB" secondAttribute="bottom" constant="16" id="4SY-S6-Bsj"/>
                             <constraint firstItem="cLQ-Kc-P5w" firstAttribute="leading" secondItem="aTL-pv-71u" secondAttribute="leading" id="5jz-3c-caj"/>
                             <constraint firstItem="IEW-oo-0ub" firstAttribute="trailing" secondItem="aTL-pv-71u" secondAttribute="trailing" id="LLx-w7-fA4"/>
                             <constraint firstItem="IEW-oo-0ub" firstAttribute="leading" secondItem="aTL-pv-71u" secondAttribute="leading" id="QRg-MZ-s45"/>
                             <constraint firstItem="7H2-8l-OTB" firstAttribute="top" secondItem="aTL-pv-71u" secondAttribute="top" id="S7P-Aa-OGw"/>
-                            <constraint firstItem="cLQ-Kc-P5w" firstAttribute="top" secondItem="zuQ-yX-XR0" secondAttribute="top" constant="110" id="Y2Y-g9-GGh"/>
+                            <constraint firstItem="cLQ-Kc-P5w" firstAttribute="top" secondItem="zuQ-yX-XR0" secondAttribute="top" constant="118" id="Y2Y-g9-GGh"/>
                             <constraint firstItem="cLQ-Kc-P5w" firstAttribute="trailing" secondItem="aTL-pv-71u" secondAttribute="trailing" id="ZRv-U0-6Ud"/>
                             <constraint firstAttribute="bottom" secondItem="IEW-oo-0ub" secondAttribute="bottom" constant="20" id="dCG-F6-IbM"/>
                             <constraint firstItem="7H2-8l-OTB" firstAttribute="leading" secondItem="cLQ-Kc-P5w" secondAttribute="leading" id="nJM-Ee-Zbg"/>
                             <constraint firstItem="7H2-8l-OTB" firstAttribute="trailing" secondItem="IEW-oo-0ub" secondAttribute="trailing" id="ofX-i2-E6W"/>
-                            <constraint firstAttribute="bottom" secondItem="cLQ-Kc-P5w" secondAttribute="bottom" constant="416" id="wXp-cj-1Kq"/>
+                            <constraint firstAttribute="bottom" secondItem="cLQ-Kc-P5w" secondAttribute="bottom" constant="468" id="wXp-cj-1Kq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aTL-pv-71u"/>
                     </view>

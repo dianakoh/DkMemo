@@ -173,17 +173,19 @@ class ComposeViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    var willShowToken: NSObjectProtocol?
-    var willHideToken: NSObjectProtocol?
+   // var willShowToken: NSObjectProtocol?
+   // var willHideToken: NSObjectProtocol?
+    
+    
     
     deinit {
-        if let token = willShowToken {
+       /* if let token = willShowToken {
             NotificationCenter.default.removeObserver(token)
         }
         
         if let token = willHideToken {
             NotificationCenter.default.removeObserver(token)
-        }
+        }*/
     }
     
     override func viewDidLoad() {
@@ -212,14 +214,14 @@ class ComposeViewController: UIViewController {
         
         titleTextView.delegate = self
         memoTextView.delegate = self
+        imageTextView.delegate = self
         
-        willShowToken = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: OperationQueue.main, using: {[weak self] (noti) in
+        /*willShowToken = NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: OperationQueue.main, using: {[weak self] (noti) in
             guard let strongSelf = self else { return }
             
             if let frame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
                 NSValue {
                 let height = frame.cgRectValue.height
-                
                 var inset = strongSelf.memoTextView.contentInset
                 inset.bottom = height
                 strongSelf.memoTextView.contentInset = inset
@@ -227,6 +229,10 @@ class ComposeViewController: UIViewController {
                 inset = strongSelf.memoTextView.scrollIndicatorInsets
                 inset.bottom = height
                 strongSelf.memoTextView.scrollIndicatorInsets = inset
+                /*let keybaordRectangle = frame.cgRectValue
+                let keyboardHeight = keybaordRectangle.height
+                self?.imageTextView.frame.origin.y -= keyboardHeight*/
+                
             }
         })
         
@@ -240,7 +246,14 @@ class ComposeViewController: UIViewController {
             inset = strongSelf.memoTextView.scrollIndicatorInsets
             inset.bottom = 0
             strongSelf.memoTextView.scrollIndicatorInsets = inset
-        })
+            /*if let frame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as?
+                NSValue {
+                /*let keybaordRectangle = frame.cgRectValue
+                let keyboardHeight = keybaordRectangle.height
+                self?.imageTextView.frame.origin.y += keyboardHeight*/
+            }*/
+        })*/
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -333,7 +346,7 @@ extension ComposeViewController {
 extension ComposeViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            let scaledImage = image.resized(toWidth: self.imageTextView.frame.size.width)
+            let scaledImage = image.resized(toWidth: self.imageTextView.frame.size.width - 20)
             let attachment = NSTextAttachment()
             attachment.image = scaledImage
             let newImageWidth = (imageTextView.bounds.size.width - 20)
