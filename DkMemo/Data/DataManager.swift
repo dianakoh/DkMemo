@@ -56,12 +56,25 @@ class DataManager {
         saveContext()
     }
     
-    func addNewMemo(_ title: String, _ memo: String, _ data:NSData) {
+    func addNewMemo(_ title: String, _ memo: String, _ data: NSData) {
         let newMemo = Memo(context: mainContext)
         newMemo.title = title
         newMemo.content = memo
         newMemo.insertDate = Date()
         newMemo.nsData = data
+        
+        memoList.insert(newMemo, at: 0)
+        
+        saveContext()
+    }
+    
+    func addNewMemo(_ title: String, _ memo: String, _ data: NSData, _ thumbnail: NSData) {
+        let newMemo = Memo(context: mainContext)
+        newMemo.title = title
+        newMemo.content = memo
+        newMemo.insertDate = Date()
+        newMemo.nsData = data
+        newMemo.thumbnail = thumbnail
         
         memoList.insert(newMemo, at: 0)
         

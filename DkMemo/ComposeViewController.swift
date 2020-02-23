@@ -15,6 +15,8 @@ class ComposeViewController: UIViewController {
     var originalMemoContent: String?
     var originalMemoNSData: NSData?
     
+    var thumbNailNSData: NSData?
+    
     let picker = UIImagePickerController()
 
     @IBAction func addImage(_ sender: Any) {
@@ -57,6 +59,7 @@ class ComposeViewController: UIViewController {
     @IBOutlet weak var imageTextView: UITextView!
     
     @IBAction func save(_ sender: Any) {
+        var thumbNailCheck = false
         guard let memo = memoTextView.text,
             memo.count > 0 else {
                 alert(message: "텍스트를 입력해주세요")
@@ -73,8 +76,24 @@ class ComposeViewController: UIViewController {
             print("메모 저장")
             let memoTitle = titleTextView.text!
             let memoNSData = imageTextView.attributedText.toNSData()!
-            //DataManager.shared.addNewMemo(memo)
-            DataManager.shared.addNewMemo(memoTitle, memo, memoNSData)
+            
+            let memoAtt = memoNSData.toAttributedString()
+            
+            memoAtt?.enumerateAttribute(.attachment, in: NSRange(location: 0, length: memoAtt!.length)) { value, range, stop in
+                if let att = value as? NSTextAttachment {
+                    let attstr = NSAttributedString(attachment: att)
+                    let attstrtodata = attstr.toNSData()
+                    
+                    if thumbNailCheck == false {
+                        thumbNailNSData = attstrtodata
+                        thumbNailCheck = true
+                    }
+                    
+                    
+                }
+            }
+            
+            DataManager.shared.addNewMemo(memoTitle, memo, memoNSData, thumbNailNSData!)
             NotificationCenter.default.post(name: ComposeViewController.newMemoDidInsert, object: nil)
         }
         
@@ -250,14 +269,15 @@ extension ComposeViewController : UIImagePickerControllerDelegate, UINavigationC
             attachment.bounds = CGRect.init(x: 0, y: 0, width: newImageWidth, height: newImageHeight)
             
             let attString = NSAttributedString(attachment: attachment)
-            imageTextView.textStorage.insert(attString, at: imageTextView.selectedRange.location)
+            //imageTextView.textStorage.insert(attString, at: imageTextView.selectedRange.location)
             //picker.dismiss(animated: true, completion: nil)
+            imageTextView.textStorage.append(attString)
             
         }
         dismiss(animated: true, completion: nil)
         titleTextView.delegate = self
         memoTextView.delegate = self
-        imageTextView.selectedTextRange = imageTextView.textRange(from: imageTextView.endOfDocument, to: imageTextView.endOfDocument)
+        //imageTextView.selectedTextRange = imageTextView.textRange(from: imageTextView.endOfDocument, to: imageTextView.endOfDocument)
     }
 }
 

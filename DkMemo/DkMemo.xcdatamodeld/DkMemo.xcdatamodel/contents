@@ -4,9 +4,10 @@
         <attribute name="content" optional="YES" attributeType="String"/>
         <attribute name="insertDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="nsData" optional="YES" attributeType="Transformable" customClassName="NSData"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Transformable" customClassName="NSData"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="Memo" positionX="-63" positionY="-18" width="128" height="103"/>
+        <element name="Memo" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>

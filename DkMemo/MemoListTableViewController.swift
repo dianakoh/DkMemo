@@ -19,7 +19,6 @@ class MemoListTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         DataManager.shared.fetchMemo()
         tableView.reloadData()
         //        tableView.reloadData()
@@ -70,8 +69,32 @@ class MemoListTableViewController: UITableViewController {
 
         // Configure the cell...
         let target = DataManager.shared.memoList[indexPath.row]
-        cell.textLabel?.text = target.content
-        cell.detailTextLabel?.text = formatter.string(for:target.insertDate)
+        cell.textLabel?.text = target.title
+        cell.detailTextLabel?.text = target.content
+        //formatter.string(for:target.insertDate)
+
+        if target.thumbnail != nil {
+            let thumbnail = imageFromAttributedString(from: target.thumbnail?.toAttributedString())
+            let scaled = thumbnail?.resized(toWidth: 70.0)
+            //cell.imageView?.image = scaled
+        
+            //  Converted to Swift 5 by Swiftify v5.0.40498 - https://objectivec2swift.com/
+            let thumbnailView = UIImageView(frame: CGRect(x: 260, y: 0, width: 70, height: 70))
+
+            thumbnailView.image = scaled
+        
+            cell.contentView.addSubview(thumbnailView) //add the imageView as a subview
+        }
+        
+//        let dateLabel = UILabel(frame: CGRect(x: 120, y: 38, width: 103, height: 44))
+//        dateLabel.text = formatter.string(for: target.content)
+//        dateLabel.textColor = UIColor.lightGray
+//        dateLabel.textAlignment = .center
+//        dateLabel.font = UIFont(name: dateLabel.font.fontName, size: 12)
+//
+//        cell.contentView.addSubview(dateLabel)
+        
+        
         
         if #available(iOS 11.0, *) {
             cell.detailTextLabel?.textColor = UIColor(named: "MyLabelColor")
@@ -80,6 +103,20 @@ class MemoListTableViewController: UITableViewController {
         }
 
         return cell
+    }
+    
+    //  Converted to Swift 5 by Swiftify v5.0.40498 - https://objectivec2swift.com/
+    func imageFromAttributedString(from text: NSAttributedString?) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(text?.size() ?? CGSize.zero, _: false, _: 0.0)
+
+        // draw in context
+        text?.draw(at: CGPoint(x: 0.0, y: 0.0))
+
+        // transfer image
+        let image = UIGraphicsGetImageFromCurrentImageContext()?.withRenderingMode(.alwaysOriginal)
+        UIGraphicsEndImageContext()
+
+        return image
     }
     
 
